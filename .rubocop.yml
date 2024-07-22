@@ -5,6 +5,9 @@ require:
   - rubocop-factory_bot
   - rubocop-rspec_rails
 
+RSpec/NamedSubject:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 

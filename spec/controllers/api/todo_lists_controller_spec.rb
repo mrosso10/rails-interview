@@ -3,6 +3,39 @@ require 'rails_helper'
 describe Api::TodoListsController do
   render_views
 
+  describe 'POST create' do
+    subject do
+      post :create, params: body
+    end
+
+    let(:body) do
+      {
+        todo_list: {
+          name:
+        }
+      }
+    end
+    let(:name) { 'La tarea' }
+
+    it 'responds with status ok' do
+      subject
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'creates the todo list' do
+      expect { subject }.to change(TodoList, :count).by(1)
+    end
+
+    context 'when the name is empty' do
+      let(:name) { '' }
+
+      it 'returns with unprocessable_entity status' do
+        subject
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
   describe 'GET index' do
     let!(:todo_list) { TodoList.create(name: 'Setup RoR project') }
 
