@@ -92,3 +92,5 @@ group :development do
   gem "rubocop-rspec_rails", "~> 2.30"
   gem "brakeman", "~> 6.1"
 end
+
+gem "tailwindcss-rails", "~> 2.6"

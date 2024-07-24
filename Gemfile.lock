@@ -265,6 +265,10 @@ GEM
       mini_portile2 (~> 2.8.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    tailwindcss-rails (2.6.3-x86_64-darwin)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.6.3-x86_64-linux)
+      railties (>= 7.0.0)
     thor (1.2.1)
     timeout (0.3.2)
     turbo-rails (1.4.0)
@@ -322,6 +326,7 @@ DEPENDENCIES
   sprockets-rails
   sqlite3 (~> 1.6)
   stimulus-rails
+  tailwindcss-rails (~> 2.6)
   turbo-rails
   tzinfo-data
   web-console
