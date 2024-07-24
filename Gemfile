@@ -71,3 +71,15 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# Linters
+group :development do
+  gem "overcommit", "~> 0.64"
+  gem "rubocop", "~> 1.64"
+  gem "rubocop-rails", "~> 2.25"
+  gem "rubocop-rspec", "~> 3.0"
+  gem "rubocop-capybara", "~> 2.21"
+  gem "rubocop-factory_bot", "~> 2.26"
+  gem "rubocop-rspec_rails", "~> 2.30"
+  gem "brakeman", "~> 6.1"
+end
