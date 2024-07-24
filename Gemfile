@@ -64,10 +64,16 @@ group :development do
   # gem "spring"
 end
 
+group :development, :test do
+  gem "factory_bot_rails", "~> 6.4.3"
+  gem "faker", "~> 3.2.3"
+end
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "rspec"
   gem "capybara"
+  gem "capybara-lockstep", "~> 2.2"
   gem "selenium-webdriver"
   gem "webdrivers"
 end
