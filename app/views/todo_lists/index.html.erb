@@ -1,9 +1,21 @@
-<%= link_to 'Add Todo List', new_todo_list_path %>
-
-<div>
-  <% @todo_lists.each do |todo_list| %>
-    <div>
-      #<%= todo_list.id %> | <%= todo_list.name %>
-    </div>
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
+
+  <% content_for :title, "Todo lists" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Todo lists</h1>
+    <%= link_to "New todo list", new_todo_list_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <div id="todo_lists" class="min-w-full">
+    <% @todo_lists.each do |todo_list| %>
+      <%= render todo_list %>
+      <p>
+        <%= link_to "Show this todo list", todo_list, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </p>
+    <% end %>
+  </div>
 </div>

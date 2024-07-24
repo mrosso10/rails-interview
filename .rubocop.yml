@@ -5,6 +5,9 @@ require:
   - rubocop-factory_bot
   - rubocop-rspec_rails
 
+Rails/I18nLocaleTexts:
+  Enabled: false
+
 RSpec/NamedSubject:
   Enabled: false
 
