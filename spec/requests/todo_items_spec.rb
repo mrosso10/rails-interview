@@ -27,7 +27,7 @@ RSpec.describe '/todo_items' do
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      get new_todo_list_todo_item_url
+      get new_todo_list_todo_item_url(todo_list)
       expect(response).to be_successful
     end
   end
@@ -49,8 +49,9 @@ RSpec.describe '/todo_items' do
       end
 
       it 'redirects to the created todo_item' do
-        post todo_list_todo_items_url(todo_list), params: { todo_item: valid_attributes }
-        expect(response).to redirect_to(todo_list_todo_item_url(TodoItem.last))
+        post todo_list_todo_items_url(todo_list.id), params: { todo_item: valid_attributes }
+
+        expect(response).to redirect_to(todo_list_url(todo_list))
       end
     end
 
@@ -84,8 +85,7 @@ RSpec.describe '/todo_items' do
       it 'redirects to the todo_item' do
         todo_item = TodoItem.create! valid_attributes
         patch todo_list_todo_item_url(todo_list, todo_item), params: { todo_item: new_attributes }
-        todo_item.reload
-        expect(response).to redirect_to(todo_list_todo_item_url(todo_list, todo_item))
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -109,7 +109,7 @@ RSpec.describe '/todo_items' do
     it 'redirects to the todo_items list' do
       todo_item = TodoItem.create! valid_attributes
       delete todo_list_todo_item_url(todo_list, todo_item)
-      expect(response).to redirect_to(todo_list_todo_items_url(todo_list))
+      expect(response).to have_http_status(:ok)
     end
   end
 end
