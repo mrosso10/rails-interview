@@ -6,10 +6,8 @@
 
     <%= render @todo_list %>
 
-    <%= link_to "Edit this todo list", edit_todo_list_path(@todo_list), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to todo lists", todo_lists_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this todo list", @todo_list, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
+    <%= link 'Edit', edit_todo_list_path(@todo_list) %>
+    <%= link 'Back to list', todo_lists_path, type: :secondary %>
+    <%= link_delete 'Destroy', @todo_list %>
   </div>
 </div>
