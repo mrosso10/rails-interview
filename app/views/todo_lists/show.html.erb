@@ -2,20 +2,22 @@
 
 <div class="w-full flex">
   <div class="w-full">
+    <div class="mb-4 text-blue-700">
+      <%= link_to 'See all lists', todo_lists_path %>
+    </div>
     <% if notice.present? %>
       <%= render AlertComponent.new(description: notice) %>
     <% end %>
     <div id="<%= dom_id(@todo_list) %>" class="mb-4 flex justify-between w-full">
       <span class="inline-block text-[2rem]"><%= @todo_list.name %></span>
-      <span class="inline-block">
-        <%= link 'Edit', edit_todo_list_path(@todo_list), turbo_stream: 'true' %>
-        <%= link 'Back to list', todo_lists_path, type: :secondary %>
-        <%= link_delete 'Destroy', @todo_list %>
+      <span class="inline-block flex gap-7">
+        <%= link 'Edit list name', edit_todo_list_path(@todo_list), turbo_stream: 'true' %>
+        <%= link_delete 'Destroy this list', @todo_list %>
       </span>
     </div>
 
 
-    <ul id="todo_items">
+    <ul id="todo_items" class="flex flex-col gap-4">
       <% @todo_list.todo_items.each do |todo_item| %>
         <%= render todo_item %>
       <% end %>

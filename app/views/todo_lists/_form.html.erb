@@ -1,4 +1,4 @@
-<%= form_with(model: todo_list, class: "contents w-full") do |form| %>
+<div class="flex flex-col">
   <% if todo_list.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(todo_list.errors.count, "error") %> prohibited this todo_list from being saved:</h2>
@@ -10,16 +10,14 @@
       </ul>
     </div>
   <% end %>
-  <div class="w-full flex justify-between">
-    <div class="inline-block">
-      <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>
+  <%= form_with(model: todo_list, class: "w-full") do |form| %>
+    <div class="w-full flex gap-4 items-center">
+      <div class="inline-block">
+        <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none" %>
+      </div>
 
-    <div class="inline-block">
-      <%= form.submit class: "#{LinkComponent::BUTTON_CLASS} bg-green-900 text-white" %>
-      <% if action_name.in? %w(edit update) %>
-        <%= link 'Cancel', todo_list, type: :secondary %>
-      <% end %>
+      <%= form.submit 'Save', class: "#{LinkComponent::BUTTON_CLASS} text-blue-500/75 hover:text-blue-700" %>
+      <%= link 'Cancel', todo_list, type: :secondary %>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

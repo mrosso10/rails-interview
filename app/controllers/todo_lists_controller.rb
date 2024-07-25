@@ -25,7 +25,7 @@ class TodoListsController < ApplicationController
     @todo_list = TodoList.new(todo_list_params)
 
     if @todo_list.save
-      redirect_to todo_list_url(@todo_list), notice: 'Todo list was successfully created.'
+      redirect_to todo_list_url(@todo_list)
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class TodoListsController < ApplicationController
 
   def update
     if @todo_list.update(todo_list_params)
-      redirect_to todo_list_url(@todo_list), notice: 'Todo list was successfully updated.'
+      redirect_to todo_list_url(@todo_list)
     else
       render turbo_stream: turbo_stream.update(
         @todo_list,

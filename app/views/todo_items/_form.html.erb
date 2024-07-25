@@ -1,21 +1,20 @@
-<%= form_with(model: [@todo_list, todo_item], class: "contents") do |form| %>
-  <% if todo_item.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(todo_item.errors.count, "error") %> prohibited this todo_item from being saved:</h2>
+<div class="flex flex-col">
+  <%= form_with(model: [@todo_list, todo_item], class: "contents") do |form| %>
+    <% if todo_item.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg my-3">
+        <h2><%= pluralize(todo_item.errors.count, "error") %> prohibited this todo_item from being saved:</h2>
 
-      <ul>
-        <% todo_item.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% todo_item.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="flex gap-4">
+      <%= form.text_field :description, class: "block shadow rounded border border-gray-400 outline-none" %>
+      <%= form.submit 'Save', class: "#{LinkComponent::BUTTON_CLASS} text-blue-500/75 hover:text-blue-700" %>
     </div>
   <% end %>
-
-  <div class="inline-block">
-    <%= form.text_field :description, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline-block">
-    <%= form.submit class: "#{LinkComponent::BUTTON_CLASS} bg-green-900 text-white" %>
-  </div>
-<% end %>
+</div>
