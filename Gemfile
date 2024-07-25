@@ -96,3 +96,5 @@ end
 gem "tailwindcss-rails", "~> 2.6"
 
 gem "view_component", "~> 3.13"
+
+gem "simplecov", "~> 0.22.0"
