@@ -1,3 +1,5 @@
+<%= turbo_stream_from :todo_lists %>
+
 <div class="w-full">
   <% if notice.present? %>
     <%= render AlertComponent.new(description: notice) %>
@@ -13,9 +15,6 @@
   <div id="todo_lists" class="min-w-full">
     <% @todo_lists.each do |todo_list| %>
       <%= render todo_list %>
-      <p>
-        <%= link 'Show this todo list', todo_list %>
-      </p>
     <% end %>
   </div>
 </div>

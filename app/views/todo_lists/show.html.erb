@@ -3,8 +3,7 @@
     <% if notice.present? %>
       <%= render AlertComponent.new(description: notice) %>
     <% end %>
-
-    <%= render @todo_list %>
+    <h1 class="text-[2rem]"><%= @todo_list.name %></h1>
 
     <%= link 'Edit', edit_todo_list_path(@todo_list) %>
     <%= link 'Back to list', todo_lists_path, type: :secondary %>
