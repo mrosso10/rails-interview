@@ -3,9 +3,11 @@
     <% if notice.present? %>
       <%= render AlertComponent.new(description: notice) %>
     <% end %>
-    <h1 class="text-[2rem]"><%= @todo_list.name %></h1>
+    <div id="<%= dom_id(@todo_list) %>" class="mb-4">
+      <h1 class="inline-block text-[2rem]"><%= @todo_list.name %></h1>
+      <%= link 'Edit', edit_todo_list_path(@todo_list), turbo_stream: 'true' %>
+    </div>
 
-    <%= link 'Edit', edit_todo_list_path(@todo_list) %>
     <%= link 'Back to list', todo_lists_path, type: :secondary %>
     <%= link_delete 'Destroy', @todo_list %>
   </div>

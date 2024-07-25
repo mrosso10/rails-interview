@@ -13,7 +13,13 @@ class TodoListsController < ApplicationController
   end
 
   # GET /todo_lists/1/edit
-  def edit; end
+  def edit
+    render turbo_stream: turbo_stream.update(
+      @todo_list,
+      partial: 'form',
+      locals: { todo_list: @todo_list }
+    )
+  end
 
   def create
     @todo_list = TodoList.new(todo_list_params)
@@ -29,7 +35,11 @@ class TodoListsController < ApplicationController
     if @todo_list.update(todo_list_params)
       redirect_to todo_list_url(@todo_list), notice: 'Todo list was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity
+      render turbo_stream: turbo_stream.update(
+        @todo_list,
+        partial: 'form',
+        locals: { todo_list: @todo_list }
+      ), status: :unprocessable_entity
     end
   end
 
