@@ -1,16 +1,18 @@
 class TodoItemsController < ApplicationController
-  before_action :set_todo_item, only: %i[show edit update destroy]
+  before_action :set_todo_item, only: %i[edit update destroy]
   before_action :set_todo_list
 
   def new
     @todo_item = TodoItem.new
     render turbo_stream: turbo_stream.update(
-      'new_todo_item', partial: 'form', locals: { todo_item: @todo_item })
+      'new_todo_item', partial: 'form', locals: { todo_item: @todo_item }
+    )
   end
 
   def edit
     render turbo_stream: turbo_stream.update(
-      @todo_item, partial: 'form', locals: { todo_item: @todo_item })
+      @todo_item, partial: 'form', locals: { todo_item: @todo_item }
+    )
   end
 
   def create
@@ -20,8 +22,9 @@ class TodoItemsController < ApplicationController
       redirect_to todo_list_path(@todo_list)
     else
       render turbo_stream: turbo_stream.update(
-        'new_todo_item', partial: 'form', locals: { todo_item: @todo_item }),
-        status: :unprocessable_entity
+        'new_todo_item', partial: 'form', locals: { todo_item: @todo_item }
+      ),
+             status: :unprocessable_entity
     end
   end
 
@@ -30,8 +33,9 @@ class TodoItemsController < ApplicationController
       render turbo_stream: turbo_stream.replace(@todo_item, @todo_item, locals: { todo_item: @todo_item })
     else
       render turbo_stream: turbo_stream.update(
-        @todo_item, partial: 'form', locals: { todo_item: @todo_item }),
-          status: :unprocessable_entity
+        @todo_item, partial: 'form', locals: { todo_item: @todo_item }
+      ),
+             status: :unprocessable_entity
     end
   end
 
