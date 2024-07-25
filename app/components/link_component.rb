@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LinkComponent < ViewComponent::Base
-  BUTTON_CLASS = 'inline-block rounded py-2 px-3 text-white font-medium'
+  BUTTON_CLASS = 'inline-block rounded py-2 px-3 font-medium'
 
   def initialize(
     text:,
@@ -22,7 +22,7 @@ class LinkComponent < ViewComponent::Base
   def call
     options = {
       'data-turbo-method': @method,
-      class: "#{BUTTON_CLASS} #{background_color}"
+      class: "#{BUTTON_CLASS} #{fg_color} #{bg_color}"
     }
     options[:'data-turbo-stream'] = true if @turbo_stream
     link_to @text, @target, options
@@ -30,7 +30,17 @@ class LinkComponent < ViewComponent::Base
 
   private
 
-  def background_color
+  def fg_color
+    {
+      primary: 'text-white',
+      secondary: 'text-white',
+      danger: 'text-white',
+      link: 'text-blue-800',
+      link_danger: 'text-red-800'
+    }[@type]
+  end
+
+  def bg_color
     {
       primary: 'bg-blue-900',
       secondary: 'bg-gray-800',

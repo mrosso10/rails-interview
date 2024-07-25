@@ -3,7 +3,7 @@ module LinksHelper
     render LinkComponent.new(text:, target:, type:, **)
   end
 
-  def link_delete(text, target, type: :danger)
-    render LinkComponent.new(text:, target:, type:, method: :delete)
+  def link_delete(text, target, type: :danger, **)
+    render LinkComponent.new(text:, target:, type:, method: :delete, **)
   end
 end

@@ -18,7 +18,7 @@
         <%= render todo_item %>
       <% end %>
     </ul>
-    <div id="new_todo_item">
+    <div class="mt-5" id="new_todo_item">
       <%= link 'Add item', new_todo_list_todo_item_path(@todo_list), turbo_stream: true %>
     </div>
   </div>

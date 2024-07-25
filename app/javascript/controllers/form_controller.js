@@ -5,6 +5,6 @@ import { patch } from '@rails/request.js'
 export default class extends Controller {
   submit() {
     const formData = new FormData(this.element)
-    patch(form.action, { body: formData , responseKind: 'turbo-stream'})
+    patch(this.element.action, { body: formData , responseKind: 'turbo-stream'})
   }
 }
