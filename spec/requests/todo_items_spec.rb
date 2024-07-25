@@ -16,34 +16,18 @@ RSpec.describe '/todo_items' do
   # This should return the minimal set of attributes required to create a valid
   # TodoItem. As you add validations to TodoItem, be sure to
   # adjust the attributes here as well.
-  let(:todo_list_id) { create(:todo_list).id }
+  let(:todo_list) { create(:todo_list) }
   let(:valid_attributes) do
-    attributes_for(:todo_item).merge(todo_list_id:)
+    attributes_for(:todo_item).merge(todo_list_id: todo_list.id)
   end
 
   let(:invalid_attributes) do
     attributes_for(:todo_item, description: nil)
   end
 
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      TodoItem.create! valid_attributes
-      get todo_items_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      todo_item = TodoItem.create! valid_attributes
-      get todo_item_url(todo_item)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET /new' do
     it 'renders a successful response' do
-      get new_todo_item_url
+      get new_todo_list_todo_item_url
       expect(response).to be_successful
     end
   end
@@ -51,7 +35,7 @@ RSpec.describe '/todo_items' do
   describe 'GET /edit' do
     it 'renders a successful response' do
       todo_item = TodoItem.create! valid_attributes
-      get edit_todo_item_url(todo_item)
+      get edit_todo_list_todo_item_url(todo_list, todo_item)
       expect(response).to be_successful
     end
   end
@@ -60,25 +44,25 @@ RSpec.describe '/todo_items' do
     context 'with valid parameters' do
       it 'creates a new TodoItem' do
         expect do
-          post todo_items_url, params: { todo_item: valid_attributes }
+          post todo_list_todo_items_url(todo_list), params: { todo_item: valid_attributes }
         end.to change(TodoItem, :count).by(1)
       end
 
       it 'redirects to the created todo_item' do
-        post todo_items_url, params: { todo_item: valid_attributes }
-        expect(response).to redirect_to(todo_item_url(TodoItem.last))
+        post todo_list_todo_items_url(todo_list), params: { todo_item: valid_attributes }
+        expect(response).to redirect_to(todo_list_todo_item_url(TodoItem.last))
       end
     end
 
     context 'with invalid parameters' do
       it 'does not create a new TodoItem' do
         expect do
-          post todo_items_url, params: { todo_item: invalid_attributes }
+          post todo_list_todo_items_url(todo_list), params: { todo_item: invalid_attributes }
         end.not_to change(TodoItem, :count)
       end
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post todo_items_url, params: { todo_item: invalid_attributes }
+        post todo_list_todo_items_url(todo_list), params: { todo_item: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -92,23 +76,23 @@ RSpec.describe '/todo_items' do
 
       it 'updates the requested todo_item' do
         todo_item = TodoItem.create! valid_attributes
-        patch todo_item_url(todo_item), params: { todo_item: new_attributes }
+        patch todo_list_todo_item_url(todo_list, todo_item), params: { todo_item: new_attributes }
         todo_item.reload
         expect(todo_item.description).to eq new_attributes[:description]
       end
 
       it 'redirects to the todo_item' do
         todo_item = TodoItem.create! valid_attributes
-        patch todo_item_url(todo_item), params: { todo_item: new_attributes }
+        patch todo_list_todo_item_url(todo_list, todo_item), params: { todo_item: new_attributes }
         todo_item.reload
-        expect(response).to redirect_to(todo_item_url(todo_item))
+        expect(response).to redirect_to(todo_list_todo_item_url(todo_list, todo_item))
       end
     end
 
     context 'with invalid parameters' do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         todo_item = TodoItem.create! valid_attributes
-        patch todo_item_url(todo_item), params: { todo_item: invalid_attributes }
+        patch todo_list_todo_item_url(todo_list, todo_item), params: { todo_item: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -118,14 +102,14 @@ RSpec.describe '/todo_items' do
     it 'destroys the requested todo_item' do
       todo_item = TodoItem.create! valid_attributes
       expect do
-        delete todo_item_url(todo_item)
+        delete todo_list_todo_item_url(todo_list, todo_item)
       end.to change(TodoItem, :count).by(-1)
     end
 
     it 'redirects to the todo_items list' do
       todo_item = TodoItem.create! valid_attributes
-      delete todo_item_url(todo_item)
-      expect(response).to redirect_to(todo_items_url)
+      delete todo_list_todo_item_url(todo_list, todo_item)
+      expect(response).to redirect_to(todo_list_todo_items_url(todo_list))
     end
   end
 end

@@ -1,52 +1,57 @@
 class TodoItemsController < ApplicationController
   before_action :set_todo_item, only: %i[show edit update destroy]
+  before_action :set_todo_list
 
-  def index
-    @todo_items = TodoItem.all
-  end
-
-  def show; end
-
-  # GET /todo_items/new
   def new
     @todo_item = TodoItem.new
+    render turbo_stream: turbo_stream.update(
+      'new_todo_item', partial: 'form', locals: { todo_item: @todo_item })
   end
 
-  # GET /todo_items/1/edit
-  def edit; end
+  def edit
+    render turbo_stream: turbo_stream.update(
+      @todo_item, partial: 'form', locals: { todo_item: @todo_item })
+  end
 
   def create
-    @todo_item = TodoItem.new(todo_item_params)
+    @todo_item = TodoItem.new(todo_item_params.merge(todo_list_id: @todo_list.id))
 
     if @todo_item.save
-      redirect_to todo_item_url(@todo_item), notice: 'Todo item was successfully created.'
+      redirect_to todo_list_path(@todo_list)
     else
-      render :new, status: :unprocessable_entity
+      render turbo_stream: turbo_stream.update(
+        'new_todo_item', partial: 'form', locals: { todo_item: @todo_item }),
+        status: :unprocessable_entity
     end
   end
 
   def update
     if @todo_item.update(todo_item_params)
-      redirect_to todo_item_url(@todo_item), notice: 'Todo item was successfully updated.'
+      render turbo_stream: turbo_stream.replace(@todo_item, @todo_item, locals: { todo_item: @todo_item })
     else
-      render :edit, status: :unprocessable_entity
+      render turbo_stream: turbo_stream.update(
+        @todo_item, partial: 'form', locals: { todo_item: @todo_item }),
+          status: :unprocessable_entity
     end
   end
 
   def destroy
     @todo_item.destroy
 
-    redirect_to todo_items_url, notice: 'Todo item was successfully destroyed.'
+    # FIXME: turbo stream
+    redirect_to todo_list_todo_items_url(@todo_list), notice: 'Todo item was successfully destroyed.'
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  def set_todo_list
+    @todo_list = TodoList.find(params[:todo_list_id])
+  end
+
   def set_todo_item
     @todo_item = TodoItem.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def todo_item_params
     params.require(:todo_item).permit(:description, :done, :todo_list_id)
   end

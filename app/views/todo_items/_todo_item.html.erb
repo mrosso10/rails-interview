@@ -1,17 +1,10 @@
-<div id="<%= dom_id todo_item %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
+<li id="<%= dom_id todo_item %>">
+  <span class="inline-block">
+    <%= form_with(model: [todo_item.todo_list, todo_item], data: { controller: 'form' }) do |f| %>
+      <%= f.check_box :done, class: 'focus:ring-0', data: { action: 'form#submit' } %>
+    <% end %>
+  </span>
+  <span class="<%= 'font-bold' if todo_item.done? %>">
     <%= todo_item.description %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Done:</strong>
-    <%= todo_item.done %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Todo list:</strong>
-    <%= todo_item.todo_list_id %>
-  </p>
-
-</div>
+  </span>
+</li>
