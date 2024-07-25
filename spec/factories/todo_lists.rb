@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :todo_list do
-    name { 'MyString' }
+    name { Faker::Lorem.sentence }
   end
 end

@@ -15,7 +15,7 @@ Style/Documentation:
   Enabled: false
 
 RSpec/ExampleLength:
-  Max: 10
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false

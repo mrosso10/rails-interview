@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :todo_item do
-    description { 'MyString' }
-    done { false }
+    description { Faker::Lorem.sentence }
+    done { [true, false].sample }
     todo_list
   end
 end
