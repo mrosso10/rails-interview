@@ -98,7 +98,7 @@ describe Api::TodoItemsController do
     end
   end
 
-  describe 'DELETE update' do
+  describe 'DELETE destroy' do
     subject do
       delete :destroy, params: {
         todo_list_id: todo_list.id,

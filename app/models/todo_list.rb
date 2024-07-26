@@ -10,4 +10,10 @@ class TodoList < ApplicationRecord
   after_destroy do
     broadcast_remove_to :todo_lists
   end
+
+  def as_json(options = {})
+    super(options).tap do |json|
+      json[:todo_items] = todo_items.as_json if options[:include_items]
+    end
+  end
 end

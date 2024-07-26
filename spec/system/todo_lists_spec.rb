@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'CRUD todo lists' do
   before do
-    driven_by :selenium_chrome
+    driven_by :selenium_chrome_headless
   end
 
   describe 'create' do

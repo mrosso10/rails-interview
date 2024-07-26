@@ -1,6 +1,6 @@
 <li id="<%= dom_id todo_item %>" class="flex items-center">
   <span class="inline-block me-2">
-    <%= form_with(model: [todo_item.todo_list, todo_item], data: { controller: 'form' }) do |f| %>
+    <%= form_with(model: [todo_item.todo_list, todo_item], class: 'leading-none', data: { controller: 'form' }) do |f| %>
       <%= f.check_box :done, class: 'focus:ring-0', data: { action: 'form#submit' } %>
     <% end %>
   </span>
