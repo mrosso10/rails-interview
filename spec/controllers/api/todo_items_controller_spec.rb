@@ -48,6 +48,16 @@ describe Api::TodoItemsController do
 
       expect(response).to have_http_status(:ok)
     end
+
+    context 'when the item doesnt belong to the list' do
+      let(:todo_item) { create(:todo_item) }
+
+      it 'returns 404' do
+        subject
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
   end
 
   describe 'POST create' do
