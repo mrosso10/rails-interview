@@ -17,9 +17,7 @@ module Api
     end
 
     def create
-      model = TodoItem.new(todo_item_params)
-      model.todo_list_id = params[:todo_list_id]
-      model.save!
+      model = TodoItem.create!(todo_item_params.merge(todo_list: @todo_list))
 
       render json: model
     end

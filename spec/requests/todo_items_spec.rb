@@ -82,7 +82,7 @@ RSpec.describe '/todo_items' do
         expect(todo_item.description).to eq new_attributes[:description]
       end
 
-      it 'redirects to the todo_item' do
+      it 'returns 200' do
         todo_item = TodoItem.create! valid_attributes
         patch todo_list_todo_item_url(todo_list, todo_item), params: { todo_item: new_attributes }
         expect(response).to have_http_status(:ok)

@@ -23,7 +23,7 @@ describe Api::TodoItemsController do
       subject
       items = response.parsed_body
 
-      aggregate_failures 'includes the id and name' do
+      aggregate_failures 'includes the id, description and done' do
         expect(items.count).to eq(1)
         expect(items[0].keys).to match_array(
           %w[created_at description id done todo_list_id updated_at]
