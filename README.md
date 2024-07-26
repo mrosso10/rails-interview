@@ -1,35 +1,22 @@
-# rails-interview / TodoApi
+# rails-interview / MR
+Minimalistic checklists app with realtime updates through websockets + API
 
-[![Open in Coder](https://dev.crunchloop.io/open-in-coder.svg)](https://dev.crunchloop.io/templates/fly-containers/workspace?param.Git%20Repository=git@github.com:crunchloop/rails-interview.git)
+## Requeriments
 
-This is a simple Todo List API built in Ruby on Rails 7. This project is currently being used for Ruby full-stack candidates.
+ - Ruby with bundler
+ - Yarn
+ - Chrome (only for selenium tests)
 
-## Build
+## Setup
 
-To build the application:
+1. `bundle install`
+2. `rails db:setup`
+3. `yarn install`
 
-`bin/setup`
+## Run server
 
-## Run the API
+`$ ./bin/dev`
 
-To run the TodoApi in your local environment:
+## Run tests
 
-`bin/puma`
-
-## Test
-
-To run tests:
-
-`bin/rspec`
-
-Check integration tests at: (https://github.com/crunchloop/interview-tests)
-
-## Contact
-
-- Santiago Doldán (sdoldan@crunchloop.io)
-
-## About Crunchloop
-
-![crunchloop](https://s3.amazonaws.com/crunchloop.io/logo-blue.png)
-
-We strongly believe in giving back :rocket:. Let's work together [`Get in touch`](https://crunchloop.io/#contact).
+`$ bundle exec rspec`
