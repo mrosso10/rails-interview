@@ -75,10 +75,9 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "rspec"
-  gem "capybara"
-  gem "capybara-lockstep", "~> 2.2"
-  gem "selenium-webdriver"
-  gem "webdrivers"
+  gem 'capybara', '~> 3.40.0'
+  gem 'capybara-lockstep', '~> 2.2'
+  gem 'selenium-webdriver', '~> 4.17.0'
 end
 
 # Linters
