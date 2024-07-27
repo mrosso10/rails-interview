@@ -13,7 +13,7 @@
   <%= form_with(model: todo_list, class: "w-full") do |form| %>
     <div class="w-full flex gap-4 items-center">
       <div class="inline-block">
-        <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none" %>
+        <%= form.text_field :name, autofocus: true, class: "block shadow rounded-md border border-gray-400 outline-none" %>
       </div>
 
       <%= form.submit 'Save', class: "#{LinkComponent::BUTTON_CLASS} text-blue-500/75 hover:text-blue-700" %>

@@ -6,12 +6,13 @@ describe 'CRUD todo lists' do
   end
 
   describe 'create' do
+    let(:list_name) { Faker::Lorem.sentence }
     it do
       visit '/todolists'
       click_on 'New todo list'
-      fill_in 'todo_list_name', with: Faker::Lorem.sentence
+      fill_in 'todo_list_name', with: list_name
       click_on 'Save'
-      expect(page).to have_text 'Add item'
+      expect(page).to have_text list_name
     end
   end
 

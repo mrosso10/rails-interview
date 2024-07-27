@@ -12,9 +12,9 @@
       </div>
     <% end %>
 
-    <div class="flex gap-4">
-      <%= form.text_field :description, class: "block shadow rounded border border-gray-400 outline-none" %>
-      <%= form.submit 'Save', class: "#{LinkComponent::BUTTON_CLASS} text-blue-500/75 hover:text-blue-700" %>
+    <div class="flex gap-4 items-center">
+      <%= form.text_field :description, autofocus: true, placeholder: 'Item description', class: "block shadow rounded border border-gray-400 outline-none" %>
+      <%= form.submit 'Add', class: "#{LinkComponent::BUTTON_CLASS} text-blue-500/75 hover:text-blue-700" %>
     </div>
   <% end %>
 </div>

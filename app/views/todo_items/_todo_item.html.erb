@@ -1,11 +1,15 @@
 <li id="<%= dom_id todo_item %>" class="flex items-center">
   <span class="inline-block me-2">
     <%= form_with(model: [todo_item.todo_list, todo_item], class: 'leading-none', data: { controller: 'form' }) do |f| %>
-      <%= f.check_box :done, class: 'focus:ring-0', data: { action: 'form#submit' } %>
+      <%= f.check_box :done, id: dom_id(todo_item, :done),class: 'hover:cursor-pointer focus:ring-0', data: { action: 'form#submit' } %>
+
+      <!-- <button class="<%= 'line-through' if todo_item.done? %>" data-action="click->form#submit"> -->
+      <%= f.label :done, for: dom_id(todo_item, :done) do %>
+        <span class="hover:cursor-pointer <%= 'line-through' if todo_item.done? %>">
+          <%= todo_item.description %>
+        </span>
+      <% end %>
     <% end %>
-  </span>
-  <span class="<%= 'line-through' if todo_item.done? %>">
-    <%= todo_item.description %>
   </span>
   <%= link_to 'Edit', edit_todo_list_todo_item_path(todo_item.todo_list, todo_item), 'data-turbo-stream': true, class: 'h-full ml-4 text-sm text-slate-300 hover:text-blue-800' %>
   <%= link_to 'Destroy', todo_list_todo_item_path(todo_item.todo_list, todo_item), 'data-turbo-method': 'delete', class: 'ml-1 text-sm text-slate-300 hover:text-red-800' %>

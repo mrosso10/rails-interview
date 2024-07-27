@@ -23,7 +23,7 @@
       <% end %>
     </ul>
     <div class="mt-5" id="new_todo_item">
-      <%= link 'Add item', new_todo_list_todo_item_path(@todo_list), turbo_stream: true %>
+      <%= render partial: 'todo_items/form', locals: { todo_item: TodoItem.new } %>
     </div>
   </div>
 </div>
